@@ -1,4 +1,5 @@
 # youtube-subtitle-translator
+**注意，这是一个浏览器插件，不是程序**
 YouTube视频实时生成字幕并翻译，比平台翻译的读起来更流畅
 # YouTube 实时字幕翻译器 (YouTube Real-time Subtitle Translator)
 
