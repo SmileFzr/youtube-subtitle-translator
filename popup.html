@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>翻译设置</title>
+    <style>
+        /* 整体容器和字体美化 */
+        body { 
+            min-width: 300px; 
+            max-width: 350px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            padding: 15px; 
+            background-color: #f7f9fa; 
+            color: #333;
+        }
+        h3 { 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            text-align: center; 
+            color: #1a1a1a; 
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        /* 表单元素样式 */
+        label { 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: 500; 
+            font-size: 13px; 
+            color: #555; 
+            line-height: 1.5;
+        }
+        select, input:not([type="range"]):not([type="color"]) { 
+            width: 100%; 
+            padding: 8px 10px; 
+            margin-top: 5px; 
+            box-sizing: border-box; 
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: white;
+            transition: border-color 0.2s;
+        }
+        select:focus, input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+        input[type="color"] { 
+            height: 38px; 
+            width: 100%; 
+            border: 1px solid #ddd; 
+            padding: 2px; 
+            margin-top: 5px; 
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        
+        /* 范围输入 (Range) 的值显示 */
+        .range-container { margin-top: 5px; }
+        .range-container span { float: right; font-weight: bold; color: #007bff; }
+        
+        /* 按钮网格布局（核心改动） */
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 两列等宽 */
+            gap: 10px; 
+            margin-top: 20px;
+        }
+        
+        button { 
+            padding: 10px 5px; 
+            border: none; 
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        button:hover { 
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        button:active { 
+            transform: translateY(0); 
+            box-shadow: none;
+        }
+
+        /* 按钮配色方案 */
+        .btn-primary { background-color: #007bff; color: white; } 
+        .btn-success { background-color: #28a745; color: white; } 
+        .btn-danger { background-color: #dc3545; color: white; } 
+        .btn-info { background-color: #17a2b8; color: white; } 
+        .btn-warning { background-color: #ffc107; color: #333; } 
+        .btn-secondary { background-color: #6c757d; color: white; } 
+        
+        /* 提示信息 */
+        .hint { 
+            margin-top: 20px; 
+            padding: 10px;
+            font-size: 12px; 
+            color: #4a4a4a; 
+            text-align: center; 
+            background: #e9ecef; 
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <h3>🎬 字幕翻译设置</h3>
+
+    <label for="source-lang">视频字幕语种 (源语言):</label>
+    <select id="source-lang">
+        <option value="auto">自动检测 (Auto)</option>
+        <option value="zh">中文 (Chinese)</option>
+        <option value="en">英文 (English)</option>
+        <option value="ja">日文 (Japanese)</option>
+        <option value="ko">韩文 (Korean)</option>
+        <option value="fr">法文 (French)</option>
+        <option value="de">德文 (German)</option>
+        <option value="es">西班牙文 (Spanish)</option>
+        <option value="ru">俄文 (Russian)</option>
+        <option value="ar">阿拉伯文 (Arabic)</option>
+        <option value="pt">葡萄牙文 (Portuguese)</option>
+    </select>
+    
+    <label for="target-lang">翻译目标语种:</label>
+    <select id="target-lang">
+        <option value="zh">中文 (Chinese)</option>
+        <option value="en">英文 (English)</option>
+        <option value="ja">日文 (Japanese)</option>
+        <option value="ko">韩文 (Korean)</option>
+        <option value="fr">法文 (French)</option>
+        <option value="de">德文 (German)</option>
+        <option value="es">西班牙文 (Spanish)</option>
+        <option value="ru">俄文 (Russian)</option>
+        <option value="ar">阿拉伯文 (Arabic)</option>
+        <option value="pt">葡萄牙文 (Portuguese)</option>
+    </select>
+
+    <label for="font-size">字体和样式设置:</label>
+    
+    <div class="range-container">
+        字幕大小 (<span id="font-size-value">100</span>%):
+        <input type="range" id="font-size" min="50" max="200" value="100">
+    </div>
+
+    <div class="range-container">
+        最大行数 (<span id="line-count-value">2</span>行):
+        <input type="range" id="line-count" min="1" max="4" value="2">
+    </div>
+    
+    <div class="range-container">
+        分段缓存时间 (<span id="debounce-delay-value">500</span>ms):
+        <input type="range" id="debounce-delay" min="200" max="1500" step="50" value="500">
+    </div>
+    
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <div style="flex: 1;">
+            <label for="font-color" style="margin-top: 0;">字体颜色:</label>
+            <input type="color" id="font-color" value="#FFFF00">
+        </div>
+        <div style="flex: 1;">
+            <label for="bg-color" style="margin-top: 0;">背景颜色:</label>
+            <input type="color" id="bg-color" value="#000000">
+        </div>
+    </div>
+    
+    <div class="button-grid">
+        <button id="apply-settings" class="btn-primary">应用设置</button>
+        <button id="toggle-subtitles" class="btn-danger">关闭字幕</button>
+        <button id="manual-refresh" class="btn-info">手动刷新</button>
+        <button id="export-subtitles" class="btn-warning">导出字幕</button>
+        <button id="reset-settings" class="btn-secondary" style="grid-column: span 2;">恢复默认设置</button> 
+    </div>
+    
+    <div class="hint">💡 **Alt 键 + 鼠标** 可拖动字幕位置。</div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
